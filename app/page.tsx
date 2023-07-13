@@ -1,69 +1,73 @@
 
 'use client'
-import { useEffect, useState } from "react"
+import { useEffect, useState } from "react";
 
-
-const getLocalItems = ()=>{
-  let list = localStorage.getItem("list")
-  if(list){
-    return JSON.parse(localStorage.getItem("list"))
-  }else{
-    return []
-  }
+interface Item {
+  id: string;
+  name: string;
 }
 
+const getLocalItems = (): Item[] => {
+  let list = localStorage.getItem("list");
+  if (list) {
+    return JSON.parse(localStorage.getItem("list")!) as Item[];
+  } else {
+    return [];
+  }
+};
 
 export default function Home() {
+  const [value, setValue] = useState<string>("");
+  const [add, setAdd] = useState<Item[]>(getLocalItems());
+  const [toggle, setToggle] = useState<boolean>(true);
+  const [editItem, setEdititem] = useState<string | null>(null);
 
-  const [value , setValue] = useState("")
-  const [add , setAdd] = useState(getLocalItems())
-  const [toggle , setToggle] = useState(true)
-  const [editItem , setEdititem] = useState(null)
+  const handleOnChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setValue(e.target.value);
+  };
 
-  const handleOnChange = (e) => {
-    setValue(e.target.value)
-  }
- 
-   const addData = ()=>{
-    if(!value){
-      alert("Please Enter the data")
-    } else if(value && !toggle){
-       setAdd(add.map((elem)=>{
-        if(elem.id === editItem){
-          return {...elem , name:value}
-        }
-        return elem;
-       }))
-       setValue("")
-      setToggle(true)
-      setEdititem(null)
-    }else{
-      const dataWithId = {id : new Date().getTime().toString() , name:value}
-      setAdd([...add , dataWithId])
-      setValue("")
+  const addData = () => {
+    if (!value) {
+      alert("Please Enter the data");
+    } else if (value && !toggle) {
+      setAdd((prevAdd) =>
+        prevAdd.map((elem) => {
+          if (elem.id === editItem) {
+            return { ...elem, name: value };
+          }
+          return elem;
+        })
+      );
+      setValue("");
+      setToggle(true);
+      setEdititem(null);
+    } else {
+      const dataWithId: Item = {
+        id: new Date().getTime().toString(),
+        name: value,
+      };
+      setAdd((prevAdd) => [...prevAdd, dataWithId]);
+      setValue("");
     }
-   }
+  };
 
-   const deleteItem = (index)=>{
-         const updateItems= add.filter((elem)=>{
-          return index!=elem.id;
-         })
-         setAdd(updateItems)
-   }
+  const deleteItem = (index: string) => {
+    const updateItems = add.filter((elem) => index !== elem.id);
+    setAdd(updateItems);
+  };
 
-  const editItems = (ind)=>{
-    const editItem = add.find((elem)=>{
-      return elem.id === ind
-    })
-    setValue(editItem.name)
-      setToggle(false)
-      setEdititem(ind)
-  }
-   
-   useEffect(()=>{
-    localStorage.setItem("list",JSON.stringify(add))
-   },[add])
+  const editItems = (ind: string) => {
+    const editItem = add.find((elem) => elem.id === ind);
+    if (editItem) {
+      setValue(editItem.name);
+      setToggle(false);
+      setEdititem(ind);
+    }
+  };
 
+  useEffect(() => {
+    localStorage.setItem("list", JSON.stringify(add));
+  }, [add]);
 
 
     
@@ -71,7 +75,8 @@ export default function Home() {
     <div>
       <div>
         <div className="flex gap-3 xm:gap-2 ">
-          <input className="border-solid pl-4 pr-4 shadow-md font-[Inter] font-medium text-base opacity-100 bg-[#262626d9] text-[#dedede] border-[#262626d9] border-2 w-[566px] md:w-96 sm:w-80 xs:w-60 xm:w-52 rounded-md" value={value} onChange={handleOnChange}/>
+          <input className="border-solid pl-4 pr-4 shadow-md font-[Inter] font-medium text-base opacity-100 bg-[#262626d9]
+           text-[#dedede] border-[#262626d9] border-2 w-[566px] md:w-96 sm:w-80 xs:w-60 xm:w-52 rounded-md" value={value} onChange={handleOnChange}/>
           <a className="flex justify-center items-center p-2  px-8 sm:px-5 bg-[#3aa1ddd6] bg-opacity-100 rounded-md hover:cursor-pointer">
            {toggle ? ( 
             <h1 className="font-roboto font-medium text-560 text-[Inter] text-[#fffefe] text-20" onClick={addData} >
