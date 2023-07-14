@@ -8,14 +8,19 @@ interface Item {
   name: string;
 }
 
-const getLocalItems = (): Item[] => {
+const getLocalItems = (): Item[] | (()=> Item[]) => {  
+  if (typeof window !== 'undefined') {
   let list = localStorage.getItem("list");
   if (list) {
     return JSON.parse(localStorage.getItem("list")!) as Item[];
-  } else {
-    return [];
   }
+}
+   else {
+    return [];
+   }
+   return()=>[]
 };
+
 
 export default function Home() {
   const [value, setValue] = useState<string>("");
@@ -102,14 +107,16 @@ export default function Home() {
               <div className="flex gap-2 pl-6">
                 <a>
                   <Image
-                  alt="Delete"
-                    src="..\img\delete.png"
+                    alt="Delete"
+                    src="/img/delete.png"
                     className="w-5 h-5 xs:w-4 xs:h-4"
+                    width={100}
+                    height={100}
                     onClick={()=>deleteItem(element.id)}
                   />
                 </a>
                 <a>
-                  <Image alt="Edit" src="..\img\edit.png" className="w-5 h-5 xs:w-4 xs:h-4" onClick={()=>editItems(element.id)} />
+                  <Image alt="Edit" src="/img/edit.png" width={100} height={100} className="w-5 h-5 xs:w-4 xs:h-4" onClick={()=>editItems(element.id)} />
                 </a>
               </div>
             </div> 
