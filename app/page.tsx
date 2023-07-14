@@ -1,5 +1,6 @@
 
 'use client'
+import Image from "next/image";
 import { useEffect, useState } from "react";
 
 interface Item {
@@ -100,14 +101,15 @@ export default function Home() {
               <h1 className="break-all w-[544px] p-3 md:w-[375px] sm:w-72 xs:w-56 sm:text-sm xs:text-xs xm:w-48 ">{element.name}</h1>
               <div className="flex gap-2 pl-6">
                 <a>
-                  <img
+                  <Image
+                  alt="Delete"
                     src="..\img\delete.png"
                     className="w-5 h-5 xs:w-4 xs:h-4"
                     onClick={()=>deleteItem(element.id)}
                   />
                 </a>
                 <a>
-                  <img src="..\img\edit.png" className="w-5 h-5 xs:w-4 xs:h-4" onClick={()=>editItems(element.id)} />
+                  <Image alt="Edit" src="..\img\edit.png" className="w-5 h-5 xs:w-4 xs:h-4" onClick={()=>editItems(element.id)} />
                 </a>
               </div>
             </div> 
