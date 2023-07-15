@@ -1,34 +1,65 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## To-Do List Application
 
-## Getting Started
+This repository contains the source code for a simple to-do list application built using Next.js and React. The application allows users to add, edit, and delete tasks from their to-do list.
 
-First, run the development server:
+### Technologies Used
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+- Next.js
+- React
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Prerequisites
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Make sure you have the following software installed on your local machine:
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Node.js
+- npm (Node Package Manager)
 
-## Learn More
+### Getting Started
 
-To learn more about Next.js, take a look at the following resources:
+Follow the instructions below to get the application up and running on your local machine:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Clone the repository:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+   ```bash
+   git clone https://github.com/your-username/your-repository.git
+   ```
 
-## Deploy on Vercel
+2. Navigate to the project directory:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```bash
+   cd your-repository
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+3. Install the dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+5. Open your web browser and visit `http://localhost:3000` to view the application.
+
+### Code Overview
+
+The repository contains the following files and directories:
+
+- `pages/index.tsx`: The main page component that renders the to-do list UI and handles user interactions.
+- `components/Header.tsx`: A reusable header component that displays the application logo and title.
+- `globals.css`: A CSS file containing global styles for the application.
+- `public/img`: A directory that contains the images used in the application.
+
+### Usage
+
+- To add a new task, enter the task name in the input field and click the "Add" button.
+- To edit a task, click the "Edit" button next to the task and modify the task name in the input field. Then, click the "Edit" button again to save the changes.
+- To delete a task, click the "Delete" button next to the task.
+
+### Contributing
+
+Contributions are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request.
+
